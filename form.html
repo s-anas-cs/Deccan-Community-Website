@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Form - Deccan Hyderabadi Community Welfare Organization</title>
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-dark-bg: #fbfaf7;       
+            --brand-card-bg: #ffffff;       
+            --brand-footer-bg: #f4f1ea;     
+            --brand-gold: #534836;         
+            --brand-gold-hover: #3d3427;    
+            --brand-text-primary: #2d271e;   
+            --brand-text-secondary: #6b6255; 
+            --brand-border: #e6e2da;        
+            --shadow-primary: 0 20px 40px rgba(83, 72, 54, 0.05);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--brand-dark-bg);
+            color: var(--brand-text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .form-card {
+            background: var(--brand-card-bg);
+            width: 100%;
+            max-width: 950px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-primary);
+            border: 1px solid var(--brand-border);
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--brand-gold);
+        }
+
+        .form-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+            padding: 30px 15px 20px 15px;
+            border-bottom: 2px dashed var(--brand-border);
+            background: linear-gradient(180deg, var(--brand-footer-bg) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .logo-container {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid var(--brand-border);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .header-text {
+            width: 100%;
+        }
+
+        .header-text h1 {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--brand-text-primary);
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+
+        .header-text .urdu-title {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 16px;
+            color: var(--brand-gold);
+            margin-bottom: 12px;
+            line-height: 2.4;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge {
+            background: var(--brand-gold);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .form-no {
+            font-weight: 700;
+            color: var(--brand-text-secondary);
+            font-size: 13px;
+            background: var(--brand-footer-bg);
+            padding: 5px 12px;
+            border: 1px solid var(--brand-border);
+            border-radius: 6px;
+        }
+
+        .form-no span {
+            color: var(--brand-text-primary);
+        }
+
+        .form-body {
+            padding: 20px 15px;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0 20px 0;
+        }
+
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1.5px;
+            background: linear-gradient(90deg, var(--brand-border), transparent);
+        }
+
+        .section-divider span {
+            color: var(--brand-gold);
+            font-weight: 800;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--brand-card-bg);
+            padding-right: 10px;
+        }
+
+        .top-grid, .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .form-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .form-group label .en-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brand-text-primary);
+        }
+
+        .form-group label .urdu-label {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 12px;
+            color: var(--brand-text-secondary);
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--brand-border);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--brand-text-primary);
+            background-color: var(--brand-dark-bg);
+            transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(83, 72, 54, 0.08);
+        }
+
+        .photo-uploader-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .photo-uploader {
+            width: 150px;
+            height: 190px;
+            border: 2px dashed var(--brand-gold);
+            border-radius: 16px;
+            background: var(--brand-dark-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .photo-uploader img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            display: none;
+        }
+
+        .uploader-content {
+            text-align: center;
+            padding: 15px;
+            color: var(--brand-text-secondary);
+        }
+
+        .uploader-content i {
+            font-size: 32px;
+            color: var(--brand-gold);
+            margin-bottom: 8px;
+        }
+
+        .uploader-content span {
+            font-size: 11px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .cnic-box-grid {
+            display: flex;
+            width: 100%;
+        }
+
+        .cnic-input-box {
+            display: none; 
+        }
+        .cnic-mobile-input {
+            display: block;
+            width: 100%;
+        }
+
+        .gender-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .gender-btn {
+            flex: 1;
+        }
+
+        .gender-btn input[type="radio"] {
+            display: none;
+        }
+
+        .gender-btn label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 10px;
+            background: var(--brand-dark-bg);
+            border: 2px solid var(--brand-border);
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            color: var(--brand-text-secondary);
+        }
+
+        .gender-btn input[type="radio"]:checked + label {
+            background: var(--brand-footer-bg);
+            border-color: var(--brand-gold);
+            color: var(--brand-text-primary);
+        }
+
+        .declaration-container {
+            background: var(--brand-dark-bg);
+            border: 2px dashed var(--brand-border);
+            border-radius: 16px;
+            padding: 20px 15px;
+            margin-top: 35px;
+            position: relative;
+        }
+
+        .declaration-title {
+            display: inline-block;
+            background: var(--brand-gold);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 50px;
+            position: absolute;
+            top: -14px;
+            left: 15px;
+        }
+
+        .declaration-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--brand-text-primary);
+            text-align: justify;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .declaration-text-urdu {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 14px;
+            line-height: 2.3;
+            color: var(--brand-text-primary);
+            text-align: right;
+            direction: rtl;
+            border-top: 1px solid var(--brand-border);
+            padding-top: 15px;
+        }
+
+        .signature-section {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .signature-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pad-controls {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 0;
+        }
+
+        .signature-pad-wrapper {
+            background: var(--brand-dark-bg);
+            border: 2px solid var(--brand-border);
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        canvas#signatureCanvas {
+            width: 100%;
+            height: 150px;
+            display: block;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        .actions-bar {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 12px;
+            margin-top: 35px;
+            border-top: 1px solid var(--brand-border);
+            padding-top: 25px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary {
+            background: var(--brand-footer-bg);
+            color: var(--brand-text-primary);
+            border: 1px solid var(--brand-border);
+        }
+
+        .btn-primary {
+            background: var(--brand-gold);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--brand-gold-hover);
+        }
+
+        .btn-primary:disabled {
+            background: var(--brand-text-secondary);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 40px 20px; }
+            .form-card { border-radius: 32px; }
+            
+            .form-header {
+                flex-direction: row;
+                text-align: left;
+                padding: 40px 40px 25px 40px;
+                gap: 25px;
+            }
+            .logo-container { width: 130px; height: 130px; }
+            .header-text h1 { font-size: 24px; }
+            .header-text .urdu-title { font-size: 20px; text-align: left; }
+            .header-meta { flex-direction: row; justify-content: space-between; }
+            
+            .form-body { padding: 40px; }
+            .section-divider span { font-size: 16px; }
+            
+            .top-grid { grid-template-columns: 1fr 180px; gap: 30px; }
+            .form-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            .full-width { grid-column: span 2; }
+            
+            .cnic-mobile-input { display: none; }
+            .cnic-input-box { display: block; }
+            .cnic-box-grid { gap: 4px; }
+            .cnic-input-box {
+                flex: 1; height: 44px; text-align: center; font-size: 16px;
+                font-weight: 700; border: 2px solid var(--brand-border); border-radius: 8px;
+                background: var(--brand-dark-bg); color: var(--brand-text-primary);
+            }
+            .cnic-input-box:focus { outline: none; border-color: var(--brand-gold); background: #fff; }
+            .cnic-divider { align-self: center; font-size: 20px; font-weight: bold; color: var(--brand-text-secondary); }
+
+            .signature-box { max-width: 380px; }
+            .signature-section { justify-content: flex-end; }
+            .actions-bar { flex-direction: row; justify-content: flex-end; }
+            .btn { width: auto; padding: 14px 35px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <div class="form-header">
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Deccan Hyderabadi Logo">
+        </div>
+        <div class="header-text">
+            <h1>DECCAN HYDERABADI COMMUNITY WELFARE ORGANIZATION</h1>
+            <div class="urdu-title">دکن حیدرآبادی کمیونٹی ویلفیئر آرگنائزیشن کراچی</div>
+            <div class="header-meta">
+                <span class="badge"><i class="fa-solid fa-id-card-clip"></i> Membership Application Portal</span>
+                <span class="form-no">Form Serial: <span># 8402</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connected with Formspree Endpoint Link provided by user -->
+    <form id="membershipForm" action="https://formspree.io/f/mrevojbq" method="POST">
+        
+        <div class="form-body">
+            
+            <div class="section-divider">
+                <span><i class="fa-solid fa-user-tie"></i> Identity Profile / ذاتی معلومات</span>
+            </div>
+
+            <div class="top-grid">
+                <div class="info-inputs">
+                    <div class="form-group">
+                        <label for="fullName">
+                            <span class="en-label">Applicant Full Name</span>
+                            <span class="urdu-label">امیدوار کا پورا نام</span>
+                        </label>
+                        <input type="text" name="Full Name" id="fullName" placeholder="Enter full official name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentage">
+                            <span class="en-label">Father's / Husband's Name</span>
+                            <span class="urdu-label">ولدیت / زوجیت</span>
+                        </label>
+                        <input type="text" name="Father/Husband Name" id="parentage" placeholder="Enter father or husband name" required>
+                    </div>
+                </div>
+
+                <div class="photo-uploader-wrapper">
+                    <div class="photo-uploader" onclick="document.getElementById('photoInput').click()">
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="renderPhotoThumbnail(event)">
+                        <div class="uploader-content" id="uploaderPlaceholder">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>Passport Size Photograph</span>
+                        </div>
+                        <img id="imageDisplay" alt="Passport Photograph">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-grid" style="margin-top: 15px;">
+                <div class="form-group full-width">
+                    <label for="address">
+                        <span class="en-label">Residential Address</span>
+                        <span class="urdu-label">موجودہ رہائشی پتہ</span>
+                    </label>
+                    <input type="text" name="Residential Address" id="address" placeholder="Complete physical home address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="houseNo">
+                        <span class="en-label">Family / House Number</span>
+                        <span class="urdu-label">گھرانہ یا مکان نمبر</span>
+                    </label>
+                    <input type="text" name="House/Family No" id="houseNo" placeholder="Enter house or family block ID">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span class="en-label">Gender Type</span>
+                        <span class="urdu-label">صنف</span>
+                    </label>
+                    <div class="gender-container">
+                        <div class="gender-btn">
+                            <input type="radio" name="Gender" id="genderMale" value="Male" required>
+                            <label for="genderMale"><i class="fa-solid fa-user-shield"></i> Male / مرد</label>
+                        </div>
+                        <div class="gender-btn">
+                            <input type="radio" name="Gender" id="genderFemale" value="Female">
+                            <label for="genderFemale"><i class="fa-solid fa-user-astronaut"></i> Female / عورت</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>
+                        <span class="en-label">CNIC Card Identification Number</span>
+                        <span class="urdu-label">قومی شناختی کارڈ نمبر</span>
+                    </label>
+                    <input type="text" name="CNIC" class="cnic-mobile-input" id="mobileCnicField" placeholder="XXXXX-XXXXXXX-X" maxlength="15">
+                    
+                    <div class="cnic-box-grid">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <span class="cnic-divider">-</span>
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                        <span class="cnic-divider">-</span>
+                        <input type="text" class="cnic-input-box desktop-cnic" maxlength="1" onkeyup="tabNextCnicBox(this)">
+                    </div>
+                    <input type="hidden" name="Compiled Desktop CNIC" id="compiledDesktopCnic">
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span><i class="fa-solid fa-map-location-dot"></i> Demographics & Constituency / علاقائی انتخابی حلقہ</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="unionCouncil">
+                        <span class="en-label">Union Council No. (UC)</span>
+                        <span class="urdu-label">یونین کونسل نمبر</span>
+                    </label>
+                    <input type="text" name="UC No" id="unionCouncil" placeholder="e.g. UC-24">
+                </div>
+
+                <div class="form-group">
+                    <label for="district">
+                        <span class="en-label">District Jurisdiction</span>
+                        <span class="urdu-label">ضلع</span>
+                    </label>
+                    <input type="text" name="District" id="district" placeholder="e.g. District East">
+                </div>
+
+                <div class="form-group">
+                    <label for="town">
+                        <span>Town / Locality</span>
+                        <span class="urdu-label">ٹاؤن / علاقہ</span>
+                    </label>
+                    <input type="text" name="Town" id="town" placeholder="e.g. Gulshan Town">
+                </div>
+
+                <div class="form-group">
+                    <label for="provincialAssembly">
+                        <span class="en-label">Provincial Assembly Block (PS)</span>
+                        <span class="urdu-label">صوبائی اسمبلی حلقہ</span>
+                    </label>
+                    <input type="text" name="PS Block" id="provincialAssembly" placeholder="e.g. PS-112">
+                </div>
+
+                <div class="form-group">
+                    <label for="nationalAssembly">
+                        <span class="en-label">National Assembly Constituency (NA)</span>
+                        <span class="urdu-label">قومی اسمبلی حلقہ</span>
+                    </label>
+                    <input type="text" name="NA Block" id="nationalAssembly" placeholder="e.g. NA-245">
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span><i class="fa-solid fa-address-book"></i> Professional & Contact Sync / روابط</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="mobileNo">
+                        <span class="en-label">Mobile Communication Line</span>
+                        <span class="urdu-label">موبائل فون نمبر</span>
+                    </label>
+                    <input type="text" name="Mobile No" id="mobileNo" placeholder="e.g. 03001234567" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <span class="en-label">Active Email Link</span>
+                        <span class="urdu-label">ای میل ایڈریس</span>
+                    </label>
+                    <input type="email" name="Email" id="email" placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="education">
+                        <span class="en-label">Highest Academic Achievement</span>
+                        <span class="urdu-label">تعلیمی قابلیت</span>
+                    </label>
+                    <input type="text" name="Education" id="education" placeholder="Degree, Certificate or Diploma">
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">
+                        <span class="en-label">Profession / Business Sector</span>
+                        <span class="urdu-label">موجودہ پیشہ / کاروبار</span>
+                    </label>
+                    <input type="text" name="Occupation" id="occupation" placeholder="Current profession profile">
+                </div>
+
+                <div class="form-group">
+                    <label for="nationality">
+                        <span class="en-label">Country of Nationality</span>
+                        <span class="urdu-label">شہریت</span>
+                    </label>
+                    <input type="text" name="Nationality" id="nationality" value="Pakistani">
+                </div>
+
+                <div class="form-group">
+                    <label for="maritalStatus">
+                        <span class="en-label">Marital State Matrix</span>
+                        <span class="urdu-label">ازدواجی حیثیت</span>
+                    </label>
+                    <select name="Marital Status" id="maritalStatus">
+                        <option value="">Choose status...</option>
+                        <option value="Single">Single / غیر شادی شدہ</option>
+                        <option value="Married">Married / شادی شدہ</option>
+                        <option value="Widowed">Widowed / بیوہ</option>
+                        <option value="Divorced">Divorced / طلاق شدہ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span><i class="fa-solid fa-people-arrows"></i> Introduction Referral Network / تعارف کنندہ</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="referredByName">
+                        <span class="en-label">Introduced By Name</span>
+                        <span class="urdu-label">تعارف کنندہ کا نام</span>
+                    </label>
+                    <input type="text" name="Referred By" id="referredByName" placeholder="Reference person's name">
+                </div>
+
+                <div class="form-group">
+                    <label for="referrerMembershipNo">
+                        <span class="en-label">Referrer Membership ID</span>
+                        <span class="urdu-label">تعارف کنندہ کا نمبر</span>
+                    </label>
+                    <input type="text" name="Referrer Membership ID" id="referrerMembershipNo" placeholder="Reference registration ID">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="designation">
+                        <span class="en-label">Proposed Organizational Designation</span>
+                        <span class="urdu-label">مجوزہ عہدہ</span>
+                    </label>
+                    <input type="text" name="Proposed Designation" id="designation" placeholder="Assigned role inside organization">
+                </div>
+            </div>
+
+            <div class="declaration-container">
+                <span class="declaration-title"><i class="fa-solid fa-gavel"></i> Oath Covenant / حلفیہ اقرارنامہ</span>
+                <p class="declaration-text">
+                    I do hereby solemnly declare, taking Almighty Allah as my supreme witness, that all details submitted in this membership application are truthful and accurate. As a loyal member of the <strong>Deccan Hyderabadi Community Welfare Organization</strong>, I promise to faithfully protect the mission, objectives, constitution, and core values of this NGO.
+                </p>
+                <p class="declaration-text-urdu">
+                    میں اقرار کرتا ہوں کہ اللہ تعالیٰ کو حاضر و ناظر جان کر حلفیہ بیان دیتا ہوں کہ اس فارم میں فراہم کردہ تمام معلومات بالکل درست اور سچی ہیں۔ میں دکن حیدرآبادی کمیونٹی ویلفیئر آرگنائزیشن کے آئین اور منشور کی مکمل پاسداری کروں گا۔
+                </p>
+            </div>
+
+            <div class="signature-section">
+                <div class="signature-box">
+                    <label>
+                        <span class="en-label"><i class="fa-solid fa-signature"></i> Draw Signature Here</span>
+                        <span class="urdu-label">امیدوار کے دستخط</span>
+                    </label>
+                    <div class="signature-pad-wrapper">
+                        <canvas id="signatureCanvas"></canvas>
+                    </div>
+                    <div class="pad-controls">
+                        <button type="button" class="clear-btn" onclick="clearDrawPad()"><i class="fa-solid fa-eraser"></i> Clear Pad (دوبارہ لکھیں)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-bar">
+                <button type="button" class="btn btn-secondary" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i> Print Out PDF Form
+                </button>
+                <button type="submit" id="submitBtn" class="btn btn-primary">
+                    <i class="fa-solid fa-file-shield"></i> Submit Membership Record
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script>
+    const canvas = document.getElementById('signatureCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawingOnPad = false;
+
+    ctx.strokeStyle = '#534836';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    function adjustCanvasScaleSize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.strokeStyle = '#534836';
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+    }
+
+    window.addEventListener('load', adjustCanvasScaleSize);
+    window.addEventListener('resize', adjustCanvasScaleSize);
+
+    function getCanvasCoordinates(event) {
+        const rect = canvas.getBoundingClientRect();
+        if (event.touches && event.touches.length > 0) {
+            return {
+                x: event.touches[0].clientX - rect.left,
+                y: event.touches[0].clientY - rect.top
+            };
+        }
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    }
+
+    function initiateDrawAction(e) {
+        isDrawingOnPad = true;
+        const coord = getCanvasCoordinates(e);
+        ctx.beginPath();
+        ctx.moveTo(coord.x, coord.y);
+    }
+
+    function paintTraceStroke(e) {
+        if (!isDrawingOnPad) return;
+        if(e.cancelable) e.preventDefault();
+        const coord = getCanvasCoordinates(e);
+        ctx.lineTo(coord.x, coord.y);
+        ctx.stroke();
+    }
+
+    function ceaseDrawAction() {
+        isDrawingOnPad = false;
+        ctx.closePath();
+    }
+
+    canvas.addEventListener('mousedown', initiateDrawAction);
+    canvas.addEventListener('mousemove', paintTraceStroke);
+    canvas.addEventListener('mouseup', ceaseDrawAction);
+    canvas.addEventListener('mouseleave', ceaseDrawAction);
+
+    canvas.addEventListener('touchstart', initiateDrawAction);
+    canvas.addEventListener('touchmove', paintTraceStroke);
+    canvas.addEventListener('touchend', ceaseDrawAction);
+
+    function clearDrawPad() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function renderPhotoThumbnail(event) {
+        const photoFile = event.target.files[0];
+        if (photoFile) {
+            const fileReader = new FileReader();
+            fileReader.onload = function(e) {
+                const imageDisplay = document.getElementById('imageDisplay');
+                const placeholder = document.getElementById('uploaderPlaceholder');
+                imageDisplay.src = e.target.result;
+                imageDisplay.style.display = 'block';
+                placeholder.style.display = 'none';
+            }
+            fileReader.readAsDataURL(photoFile);
+        }
+    }
+
+    function tabNextCnicBox(element) {
+        if (element.value.length >= element.maxLength) {
+            let nextBoxNode = element.nextElementSibling;
+            if (nextBoxNode && nextBoxNode.tagName === 'SPAN') {
+                nextBoxNode = nextBoxNode.nextElementSibling;
+            }
+            if (nextBoxNode && nextBoxNode.classList.contains('cnic-input-box')) {
+                nextBoxNode.focus();
+            }
+        }
+        compileDesktopCnic();
+    }
+
+    function compileDesktopCnic() {
+        const boxes = document.querySelectorAll('.desktop-cnic');
+        let fullCnic = "";
+        boxes.forEach((box, index) => {
+            fullCnic += box.value;
+            if(index === 4 || index === 11) fullCnic += "-";
+        });
+        document.getElementById('compiledDesktopCnic').value = fullCnic;
+    }
+
+    const mobileCnic = document.getElementById('mobileCnicField');
+    mobileCnic.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        let formatted = '';
+        if (value.length > 0) {
+            formatted += value.substr(0, 5);
+            if (value.length > 5) {
+                formatted += '-' + value.substr(5, 7);
+                if (value.length > 12) {
+                    formatted += '-' + value.substr(12, 1);
+                }
+            }
+        }
+        e.target.value = formatted;
+    });
+
+    // Formspree AJAX Submission Integration with Instant Redirection
+    document.getElementById("membershipForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const form = event.target;
+        const button = document.getElementById("submitBtn");
+        
+        button.disabled = true;
+        button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting Form...';
+
+        // Storing details locally to dynamically auto-fill step 1 inside payment page
+        const applicantName = document.getElementById('fullName').value;
+        localStorage.setItem('applicantName', applicantName);
+
+        const data = new FormData(form);
+        
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                // SUCCESS: Smooth redirection straight to the payment gateway layout page
+                window.location.href = "payment.html"; 
+            } else {
+                response.json().then(data => {
+                    if (data.errors) {
+                        alert("Submission Error: " + data.errors.map(error => error.message).join(", "));
+                    } else {
+                        alert("Submission failed. Please verify your Formspree integration settings.");
+                    }
+                    button.disabled = false;
+                    button.innerHTML = '<i class="fa-solid fa-file-shield"></i> Submit Membership Record';
+                });
+            }
+        }).catch(error => {
+            console.error("Submission Failure:", error);
+            alert("Network error! Please check your internet connection and try again.");
+            button.disabled = false;
+            button.innerHTML = '<i class="fa-solid fa-file-shield"></i> Submit Membership Record';
+        });
+    });
+</script>
+
+</body>
+</html>

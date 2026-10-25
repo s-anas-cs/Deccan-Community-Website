@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway - Deccan Hyderabadi Community Welfare Organization</title>
+    <!-- Google Fonts for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --brand-dark-bg: #fbfaf7;       
+            --brand-card-bg: #ffffff;       
+            --brand-footer-bg: #f4f1ea;     
+            --brand-gold: #534836;         
+            --brand-gold-hover: #3d3427;    
+            --brand-text-primary: #2d271e;   
+            --brand-text-secondary: #6b6255; 
+            --brand-border: #e6e2da;        
+            --shadow-primary: 0 20px 40px rgba(83, 72, 54, 0.05);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--brand-dark-bg);
+            color: var(--brand-text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .payment-card {
+            background: var(--brand-card-bg);
+            width: 100%;
+            max-width: 700px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-primary);
+            border: 1px solid var(--brand-border);
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--brand-gold);
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            padding: 30px 20px;
+            background: linear-gradient(180deg, var(--brand-footer-bg) 0%, rgba(255, 255, 255, 0) 100%);
+            border-bottom: 1px solid var(--brand-border);
+        }
+
+        .logo-box {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--brand-border);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+            color: var(--brand-text-primary);
+        }
+
+        .subject-badge {
+            background: var(--brand-gold);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        /* Content Body */
+        .payment-body {
+            padding: 24px 20px;
+        }
+
+        .welcome-msg {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--brand-text-secondary);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        /* Account Details Box */
+        .account-details-container {
+            background: var(--brand-footer-bg);
+            border: 1px solid var(--brand-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .account-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--brand-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--brand-border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--brand-text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: white;
+            border: 1px solid var(--brand-border);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--brand-gold);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .copy-btn:hover {
+            background: var(--brand-gold);
+            color: white;
+            border-color: var(--brand-gold);
+        }
+
+        /* Instructions Segment */
+        .notice-box {
+            background: #fffdf9;
+            border-left: 4px solid var(--brand-gold);
+            padding: 15px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+        }
+
+        .notice-box h4 {
+            font-size: 13px;
+            color: var(--brand-text-primary);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .notice-box p {
+            font-size: 12.5px;
+            color: var(--brand-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Form Controls & Verification Upload */
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--brand-text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brand-text-primary);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--brand-border);
+            border-radius: 10px;
+            font-size: 14px;
+            background-color: var(--brand-dark-bg);
+            color: var(--brand-text-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(83, 72, 54, 0.06);
+        }
+
+        /* Receipt Image Upload Area */
+        .upload-area {
+            border: 2px dashed var(--brand-border);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            background: var(--brand-dark-bg);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: var(--brand-gold);
+        }
+
+        .upload-placeholder i {
+            font-size: 28px;
+            color: var(--brand-gold);
+            margin-bottom: 8px;
+        }
+
+        .upload-placeholder p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brand-text-secondary);
+        }
+
+        .upload-placeholder span {
+            font-size: 11px;
+            color: #a0988d;
+            display: block;
+            margin-top: 4px;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            border: 1px solid var(--brand-border);
+        }
+
+        /* Action Footer Buttons */
+        .submit-btn {
+            width: 100%;
+            background: var(--brand-gold);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .submit-btn:hover {
+            background: var(--brand-gold-hover);
+        }
+
+        /* Footer Info Links */
+        .footer-banner {
+            background: var(--brand-footer-bg);
+            border-top: 1px solid var(--brand-border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--brand-text-secondary);
+            font-weight: 500;
+        }
+
+        .info-item i {
+            color: var(--brand-gold);
+        }
+
+        .motto-text {
+            font-size: 12px;
+            font-style: italic;
+            color: var(--brand-text-secondary);
+            margin-top: 5px;
+            border-top: 1px solid var(--brand-border);
+            width: 100%;
+            padding-top: 10px;
+        }
+
+        /* Success Overlay System */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(45, 39, 30, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 15px;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .success-modal {
+            background: var(--brand-card-bg);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border: 1px solid var(--brand-border);
+        }
+
+        .success-icon {
+            width: 65px;
+            height: 65px;
+            background: var(--brand-footer-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            color: var(--brand-gold);
+            font-size: 28px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 576px) {
+            .header { padding: 40px 30px; }
+            .header h1 { font-size: 22px; }
+            .payment-body { padding: 30px; }
+            .form-grid { grid-template-columns: repeat(2, 1fr); }
+            .full-row { grid-column: span 2; }
+            .contact-info { flex-direction: row; justify-content: space-around; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-card">
+    <!-- Header Area -->
+    <div class="header">
+        <div class="logo-box">
+            <img src="logo.jpeg" alt="Organization Logo">
+        </div>
+        <h1>DECCAN HYDERABADI COMMUNITY WELFARE ORGANIZATION</h1>
+        <div class="subject-badge">
+            <i class="fa-solid fa-circle-info"></i> Important Instructions Regarding Online Payment of Annual / Monthly Membership Fees
+        </div>
+    </div>
+
+    <!-- Main Dynamic Form Wrapper -->
+    <form id="paymentSubmissionForm" onsubmit="handlePaymentSubmit(event)">
+        <div class="payment-body">
+            <p class="welcome-msg">
+                Dear Member, Assalamu Alaikum! You can securely submit your dynamic organizational membership fees online through Mobile Banking or JazzCash using the account channel detailed below:
+            </p>
+
+            <!-- Official Payment Credentials Card Box (Ref: WhatsApp Image 2026-05-31 at 12.37.22.jpeg) -->
+            <div class="account-details-container">
+                <div class="account-title"><i class="fa-solid fa-building-columns"></i> Official Organization Cash Account</div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Account Channel</span>
+                    <span class="detail-value" style="color: #e28743;"><i class="fa-solid fa-wallet"></i> JazzCash Account</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Account Number</span>
+                    <span class="detail-value">
+                        <span id="accountNo">03130246428</span>
+                        <button type="button" class="copy-btn" onclick="copyText('03130246428')"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Account Holder Title</span>
+                    <span class="detail-value" style="font-weight: 800; letter-spacing: 0.3px;">Fasih Uddin</span>
+                </div>
+            </div>
+
+            <!-- Critical Limitations Notice -->
+            <div class="notice-box">
+                <h4><i class="fa-solid fa-triangle-exclamation" style="color: var(--brand-gold);"></i> Strict Instruction Notice:</h4>
+                <p>This dynamic JazzCash mobile account configuration is specifically dedicated for membership processing registration dues only. Please do <strong>NOT</strong> use this platform channel for general public donations or charity funding.</p>
+            </div>
+
+            <!-- Verification System Meta Input Fields -->
+            <div class="section-title">
+                <i class="fa-solid fa-file-invoice-dollar"></i> 1. Submit Proof of Payment Details
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="userName">Applicant Full Name</label>
+                    <input type="text" id="userName" placeholder="Your registered name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="membershipNo">Membership Serial Number</label>
+                    <input type="text" id="membershipNo" placeholder="e.g. DH-8402" required>
+                </div>
+
+                <div class="form-group full-row">
+                    <label for="transactionId">Transaction ID (TID Reference)</label>
+                    <input type="text" id="transactionId" placeholder="Enter the 11-12 digit Transaction ID number" required>
+                </div>
+
+                <!-- Digital File Screenshot Vault Pipeline Layer -->
+                <div class="form-group full-row">
+                    <label>Upload Transfer Confirmation Screenshot</label>
+                    <div class="upload-area" onclick="document.getElementById('receiptInput').click()">
+                        <input type="file" id="receiptInput" accept="image/*" style="display: none;" onchange="processImageThumbnail(event)" required>
+                        <div class="upload-placeholder" id="placeholderWrapper">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p>Select Transaction Digital Receipt</p>
+                            <span>Supports JPEG, PNG file formats</span>
+                        </div>
+                        <img id="previewImage" alt="Transaction Proof">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Note Tagline Segment -->
+            <div style="font-size: 12.5px; color: var(--brand-text-secondary); margin-bottom: 25px; line-height: 1.5;">
+                <i class="fa-solid fa-circle-check" style="color: var(--brand-gold);"></i> <strong>Note:</strong> It is mandatory to acquire an official electronic or physical organization receipt once your backend transactional trace is verified.
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fa-solid fa-shield-heart"></i> Dispatch Transaction Verification Records
+            </button>
+        </div>
+    </form>
+
+    <!-- Footer Segment Base Plate Layer -->
+    <div class="footer-banner">
+        <div style="font-size: 13px; font-weight: 700; color: var(--brand-text-primary);">Contact & Support Information Gateway</div>
+        <div class="contact-info">
+            <span class="info-item"><i class="fa-solid fa-phone"></i> 03150216409</span>
+            <span class="info-item"><i class="fa-regular fa-envelope"></i> dhcwelfare.org</span>
+        </div>
+        <div class="motto-text">"If you wish to serve humanity, step forward."</div>
+    </div>
+</div>
+
+<!-- Modal Dialog Segment Panel Overlay Box -->
+<div class="overlay" id="paymentOverlay">
+    <div class="success-modal">
+        <div class="success-icon">
+            <i class="fa-solid fa-vault"></i>
+        </div>
+        <h2 style="color: var(--brand-text-primary); font-weight: 800; font-size: 20px;">Verification Data Locked</h2>
+        <p style="color: var(--brand-text-secondary); font-size: 13px; margin-top: 6px; line-height: 1.5;">
+            Your transaction submission record has been pushed to audit verification desk. Payment confirmation link updates will trigger via registered email shortly.
+        </p>
+        <button class="submit-btn" style="margin-top: 20px;" onclick="closePaymentSystem()">
+            <i class="fa-solid fa-circle-xmark"></i> Terminate Gateway Session
+        </button>
+    </div>
+</div>
+
+<script>
+    // System Text Clipboard Copier Logic Engine
+    function copyText(textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert("Account number copied successfully: " + textToCopy);
+        }).catch(err => {
+            console.error('Failed to capture copy sequence pipeline: ', err);
+        });
+    }
+
+    // Graphic File Stream Thumbnail Render Routine Layout
+    function processImageThumbnail(event) {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            const dataPipeReader = new FileReader();
+            dataPipeReader.onload = function(e) {
+                const previewImg = document.getElementById('previewImage');
+                const placeholderBox = document.getElementById('placeholderWrapper');
+                
+                previewImg.src = e.target.result;
+                previewImg.style.display = 'inline-block';
+                placeholderBox.style.display = 'none';
+            }
+            dataPipeReader.readAsDataURL(selectedFile);
+        }
+    }
+
+    // Dispatch Data Vault Verification Matrix Trigger Routing
+    function handlePaymentSubmit(event) {
+        event.preventDefault();
+        document.getElementById('paymentOverlay').classList.add('active');
+    }
+
+    function closePaymentSystem() {
+        document.getElementById('paymentOverlay').classList.remove('active');
+        document.getElementById('paymentSubmissionForm').reset();
+        document.getElementById('previewImage').style.display = 'none';
+        document.getElementById('placeholderWrapper').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "siteImages": {"logo": "logo.jpeg", "founder": "ceo.jpeg"},
+  "contact": {"email": "support@deccanwelfare.org", "phone": "03150216409", "address": "Karachi, Sindh, Pakistan"},
+  "services": [
+    {"id":"s1","title":"Healthcare","description":"Providing access to healthcare support, medical camps and essential health services for community members.","image":"h.jpeg","gallery":["freemedicalcamp.jpeg","eyecamp.jpeg","medicalcentre.jpeg","ambulance.jpeg"],"galleryDescriptions":["Community medical camp and health support.","Eye-care awareness and screening.","Medical centre support for families.","Emergency health assistance."]},
+    {"id":"s2","title":"Education","description":"Supporting learners through educational guidance, learning resources and community education initiatives.","image":"ed.jpeg","gallery":["modelschool.jpeg","cc.jpeg","it.jpeg","seminar.jpeg"],"galleryDescriptions":["Educational support initiative.","Learning and classroom activities.","Information technology learning.","Educational seminar and guidance."]},
+    {"id":"s3","title":"Social Welfare","description":"Organizing community assistance and welfare support with dignity, transparency and care.","image":"sw.jpeg","gallery":["iftar.jpeg","ration.jpeg","vege.jpeg","heatcmp.jpeg"],"galleryDescriptions":["Community iftar support.","Ration distribution initiative.","Food and household support.","Community relief campaign."]},
+    {"id":"s4","title":"Vocational Training for Women","description":"Empowering women through practical skills, vocational training and opportunities for greater independence.","image":"vtwomens.jpeg","gallery":["","","",""],"galleryDescriptions":["Skills development and training.","Practical vocational learning.","Training resources and tools.","Pathways to self-reliance."]}
+  ],
+  "events": [
+    {"id":"e1","title":"CAP Form Registration Session","date":"2026-06-11","description":"A community registration session supporting applicants with documentation, digital entries and registration guidance.","image":"event.jpeg","gallery":["event.jpeg","","","",""],"status":"completed"},
+    {"id":"e2","title":"Deccan Executive Assembly","date":"2026-05-28","description":"An administrative assembly reviewing community initiatives, operational priorities and future plans.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e3","title":"Class 12 Merit Alignment","date":"2026-05-15","description":"An academic guidance session for higher-secondary students exploring further education and study pathways.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e4","title":"Community IT BootCamp Initiative","date":"2026-05-02","description":"An introductory technology initiative designed to help young people develop practical digital skills.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e5","title":"Sovereign Medical Desk Launch","date":"2026-04-18","description":"A community health support initiative focused on access to medical guidance and essential services.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e6","title":"Ration Logistics Strategy Meet","date":"2026-04-05","description":"A planning meeting for organizing household support and improving welfare distribution logistics.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e7","title":"Annual Welfare Audit Board","date":"2026-03-22","description":"A review meeting focused on transparent reporting, accountability and community welfare activities.","image":"","gallery":["","","","",""],"status":"completed"},
+    {"id":"e8","title":"Youth Council Guidance Matrix","date":"2026-03-10","description":"A youth guidance session supporting students with education planning and future opportunities.","image":"","gallery":["","","","",""],"status":"completed"}
+  ]
+}

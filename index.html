@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    
+    <!-- ==========================================
+         [SETTINGS] MOBILE SCREEN ZOOM BLOCKER
+         ========================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</title>
+    
+    <!-- ==========================================
+         [EXTERNAL LINKS] TAILWIND & FONTAWESOME
+         ========================================== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ==========================================
+         [FONTS] GOOGLE FONTS STYLING
+         ========================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&family=Amiri+Quran&display=swap" rel="stylesheet">
+
+    <!-- ==========================================
+         [THEME CONFIG] TAILWIND COLOR COMBINATIONS
+         ========================================== -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        urdu: ['Noto Nastaliq Urdu', 'serif'],
+                        arabic: ['Amiri Quran', 'serif'],
+                    },
+                    colors: {
+                        brandDarkBg: '#fbfaf7',       
+                        brandCardBg: '#ffffff',       
+                        brandFooterBg: '#f4f1ea',     
+                        brandGold: '#534836',         
+                        brandGoldHover: '#3d3427',    
+                        brandTextPrimary: '#2d271e',   
+                        brandTextSecondary: '#6b6255', 
+                        brandBorder: '#e6e2da'        
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'float': 'float 4s ease-in-out infinite',
+                        'infinite-scroll': 'infiniteScroll 25s linear infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        shimmer: { '100%': { transform: 'translateX(100%)' } },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        infiniteScroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-33.3333%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ==========================================
+         [CUSTOM CSS] URDU TYPOGRAPHY & SCROLLBARS
+         ========================================== -->
+    <style>
+        .premium-urdu { 
+            font-family: 'Noto Nastaliq Urdu', serif !important; 
+            line-height: 2.4 !important; 
+            text-align: right; 
+            direction: rtl; 
+            word-spacing: -1px;
+            letter-spacing: normal;
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .premium-urdu-heading {
+            font-family: 'Noto Nastaliq Urdu', serif !important; 
+            line-height: 2.2 !important; 
+            text-align: center; 
+            direction: rtl;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .glass-nav {
+            background: rgba(251, 250, 247, 0.90);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e6e2da;
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #6b6255 0%, #534836 50%, #2d271e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hover-lift {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-6px) scale(1.005);
+            border-color: #534836 !important;
+            box-shadow: 0 20px 35px -10px rgba(83, 72, 54, 0.12);
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-25deg);
+        }
+        .shimmer-btn:hover::after {
+            animation: shimmer 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-brandDarkBg text-brandTextSecondary font-sans antialiased overflow-x-hidden pt-20">
+
+    <!-- =========================================================================
+         [SECTION 1] MAIN NAVIGATION BAR (DESKTOP & MOBILE MENU)
+         ========================================================================= -->
+    <nav class="fixed top-0 inset-x-0 z-50 glass-nav text-brandTextPrimary shadow-sm transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand Title -->
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-12 h-12 sm:w-13 sm:h-13 bg-white rounded-full flex items-center justify-center p-0.5 shadow-sm border border-brandBorder overflow-hidden group-hover:border-brandGold transition-all duration-500 group-hover:rotate-6">
+                        <img id="siteLogo" src="logo.jpeg" alt="Deccan Logo" class="w-full h-full object-contain rounded-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[10px] sm:text-xs font-bold text-brandGold tracking-widest block uppercase transition-colors duration-300 group-hover:text-brandGoldHover">Deccan Community</span>
+                        <span class="text-xs sm:text-sm font-black text-brandTextPrimary tracking-tight -mt-0.5 block">ORGANIZATION</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu Links -->
+                <div class="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-bold uppercase tracking-wider">
+                    <a href="#about" class="text-brandTextSecondary hover:text-brandGold transition-all relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-brandGold after:transition-all">About Us</a>
+                    <a href="#services" class="text-brandTextSecondary hover:text-brandGold transition-all relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-brandGold after:transition-all">Our Services</a>
+                    <a href="#events" class="text-brandTextSecondary hover:text-brandGold transition-all relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-brandGold after:transition-all">Events & Meetings</a>
+                    <a href="form.html" class="text-brandTextSecondary hover:text-brandGold transition-all relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-brandGold after:transition-all">Membership Form</a>
+                    <a href="#contact" class="shimmer-btn bg-brandGold text-white px-5 py-2.5 rounded-xl hover:bg-brandGoldHover transition-all font-extrabold shadow-md shadow-brandGold/10 hover:shadow-lg hover:shadow-brandGold/20 active:scale-95">Contact Us </a>
+                </div>
+                
+                <!-- Mobile Menu Button (Hamburger Icon) -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brandTextPrimary border border-brandBorder shadow-sm hover:bg-brandDarkBg transition-all active:scale-95">
+                        <i id="menuIcon" class="fa-solid fa-bars text-lg transition-transform duration-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Open Drawer Layout -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brandCardBg w-full absolute top-20 left-0 border-t border-brandBorder shadow-xl px-4 py-6 space-y-2 font-semibold text-sm transition-all duration-500 origin-top transform scale-y-95 opacity-0">
+            <a href="#about" onclick="toggleMobileMenu()" class="flex items-center justify-between text-brandTextSecondary py-3 px-4 rounded-xl hover:bg-brandDarkBg hover:text-brandTextPrimary transition-colors"><span>About Us</span><i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i></a>
+            <a href="#services" onclick="toggleMobileMenu()" class="flex items-center justify-between text-brandTextSecondary py-3 px-4 rounded-xl hover:bg-brandDarkBg hover:text-brandTextPrimary transition-colors"><span>Our Services</span><i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i></a>
+            <a href="#events" onclick="toggleMobileMenu()" class="flex items-center justify-between text-brandTextSecondary py-3 px-4 rounded-xl hover:bg-brandDarkBg hover:text-brandTextPrimary transition-colors"><span>Events & Meetings</span><i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i></a>
+             <a href="form.html" onclick="toggleMobileMenu()" class="flex items-center justify-between text-brandTextSecondary py-3 px-4 rounded-xl hover:bg-brandDarkBg hover:text-brandTextPrimary transition-colors"><span>Membership Form</span><i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i></a>
+            <div class="pt-4 px-4">
+                <a href="#contact" onclick="toggleMobileMenu()" class="block text-center bg-brandGold text-white font-bold py-3.5 rounded-xl shadow-md">Contact Us </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- =========================================================================
+         [SECTION 2] HERO BANNER + AUTO MOVING URDU LOOP TICKER SLIDER
+         ========================================================================= -->
+    <header class="relative overflow-hidden pt-16 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-brandBorder transparent">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(83,72,54,0.06),transparent_50%)] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10 space-y-6 sm:space-y-8 px-1 sm:px-4 animate-fade-in-up">
+            
+            <!-- Main Large Header (Urdu Main Title) -->
+            <h1 class="premium-urdu-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-gradient-gold font-bold pb-2 select-none filter drop-shadow-sm max-w-full mx-auto break-words transform transition-transform duration-700 hover:scale-[1.01]">
+                دکن حیدرآبادی  کمیونٹی ویلفیئر آرگنائزیشن
+            </h1>
+            
+            <!-- Subtitle Context English -->
+            <p class="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.35em] text-brandTextSecondary max-w-3xl mx-auto px-2 opacity-90">
+                Welfare Blueprint For Human Dignity & Support
+            </p>
+            
+            <!-- [SUB-SECTION] NASTALIQ URDU RUNNING SLIDER -->
+            <div class="w-full max-w-5xl mx-auto overflow-hidden relative py-4 sm:py-6 bg-white/40 border-y border-brandBorder/60 backdrop-blur-[2px] mt-6 sm:mt-8">
+                <div class="absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-brandDarkBg to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-brandDarkBg navigate-from-brandDarkBg to-transparent z-10 pointer-events-none"></div>
+                
+                <div class="inline-flex whitespace-nowrap gap-8 sm:gap-16 items-center animate-infinite-scroll w-max will-change-transform">
+                    <div class="flex items-center gap-8 sm:gap-16 shrink-0">
+                        <span class="premium-urdu text-sm sm:text-base md:text-lg lg:text-xl text-brandGold font-bold tracking-wide">دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</span>
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandGold/40 shrink-0"></span>
+                        <span class="premium-urdu text-sm sm:text-base md:text-lg lg:text-xl text-brandTextPrimary font-bold tracking-wide">دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</span>
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandGold/40 shrink-0"></span>
+                    </div>
+                    <div class="flex items-center gap-8 sm:gap-16 shrink-0">
+                        <span class="premium-urdu text-sm sm:text-base md:text-lg lg:text-xl text-brandGold font-bold tracking-wide">دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</span>
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandGold/40 shrink-0"></span>
+                        <span class="premium-urdu text-sm sm:text-base md:text-lg lg:text-xl text-brandTextPrimary font-bold tracking-wide">دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</span>
+                        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brandGold/40 shrink-0"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-16 sm:w-20 h-1 bg-gradient-to-r from-transparent via-brandGold to-transparent mx-auto rounded-full shadow-sm pt-1"></div>
+        </div>
+    </header>
+
+
+    <!-- =========================================================================
+         [SECTION 3] ABOUT US FOUNDATION OVERVIEW
+         ========================================================================= -->
+    <section id="about" class="reveal-element max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
+        <div class="bg-brandCardBg rounded-3xl p-5 sm:p-10 lg:p-16 shadow-xl border border-brandBorder relative overflow-hidden backdrop-blur-sm transition-shadow duration-500 hover:shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brandDarkBg border border-brandBorder text-brandGold rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brandGold animate-pulse"></span> About Us
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brandTextPrimary tracking-tight">
+                        Empowering Communities, <br><span class="text-brandGold">Preserving Values</span>
+                    </h2>
+                    <p class="text-brandTextSecondary leading-relaxed font-medium text-sm sm:text-base text-justify">
+                        Deccan Hyderabadi Welfare Community Organization is dedicated to uplifting the underprivileged sectors of society by structuring sustainable blueprints for human dignity. We target premium civic support, educational alignment, and emergency financial resilience.
+                    </p>
+                </div>
+                
+                <div class="bg-brandDarkBg p-5 sm:p-8 lg:p-12 rounded-2xl border border-brandBorder shadow-sm w-full overflow-hidden max-w-full transition-colors duration-300 hover:bg-amber-50/20">
+                    <p class="premium-urdu text-sm sm:text-base md:text-lg lg:text-xl text-brandTextPrimary font-medium max-w-full break-words">
+                        دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن کا بنیادی مقصد انسانی وقار کی بحالی اور ضرورت مند خاندانوں کی مستقل کفالت ہے۔ ہم تعلیم، صحت، اور ہنگامی امداد کے ذریعے معاشرے کے پسماندہ طبقات کو ایک منظم اور شفاف نظام کے تحت ریلیف فراہم کرنے کے لیے کوشاں ہیں۔
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================================
+         [SECTION 4] EXECUTIVE BIOGRAPHY CARD
+         ========================================================================= -->
+    <section class="reveal-element py-14 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-y border-brandBorder relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-brandCardBg rounded-3xl p-6 sm:p-10 lg:p-14 border border-brandBorder shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-14 lg:gap-16">
+                    
+                    <div class="shrink-0 w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-2xl bg-brandDarkBg flex items-center justify-center shadow-md border-4 border-white relative overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:rotate-1">
+                        <img id="founderImage" src="ceo.jpeg" alt="Founder and CEO" class="w-full h-full object-cover rounded-xl absolute inset-0">
+                    </div>
+                    
+                    <div class="space-y-4 flex-1 text-center md:text-left">
+                        <div>
+                            <span class="text-[10px] sm:text-xs font-bold tracking-widest text-brandGold uppercase bg-amber-50/60 border border-brandBorder px-3 py-1 rounded-full">Executive Vision</span>
+                            <h3 class="text-2xl sm:text-3xl md:text-4xl font-black text-brandTextPrimary mt-3 tracking-tight">Founder & CEO</h3>
+                            <p class="text-[10px] sm:text-xs font-bold text-brandTextSecondary uppercase tracking-widest mt-1">دکن حیدرآبادی   کمیونٹی ویلفیئر آرگنائزیشن</p>
+                        </div>
+                        <div class="w-12 h-0.5 bg-brandGold mx-auto md:mx-0 my-2"></div>
+                        <p class="text-brandTextSecondary leading-relaxed font-medium italic text-base sm:text-lg text-justify md:text-left">
+                            "True leadership isn't about structural control; it's about building a robust platform that safeguards human dignity and orchestrates collective empowerment for generations to come."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================================
+         [SECTION 5] OUR SERVICES LANDSCAPE SLIDER (4 CARDS)
+         ========================================================================= -->
+    <section id="services" class="reveal-element max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+    
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+        <div>
+            <span class="text-[10px] sm:text-xs font-bold tracking-widest text-brandGold uppercase bg-amber-50 border border-brandBorder px-3 py-1 rounded-full shadow-sm">SERVICES</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-brandTextPrimary tracking-tight mt-2">Our Services</h2>
+            <p class="text-xs sm:text-sm text-brandTextSecondary mt-1">We provide Healthcare, Education , Social Welfare , Vocational Traning for womens.</p>
+        </div>
+        <div class="flex gap-3 self-end sm:self-auto">
+            <button onclick="scrollServices('left')" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-brandBorder shadow-sm flex items-center justify-center hover:bg-brandGold hover:text-white hover:-translate-x-0.5 transition-all text-brandTextSecondary active:scale-90">
+                <i class="fa-solid fa-arrow-left text-xs sm:text-sm"></i>
+            </button>
+            <button onclick="scrollServices('right')" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-brandBorder shadow-sm flex items-center justify-center hover:bg-brandGold hover:text-white hover:translate-x-0.5 transition-all text-brandTextSecondary active:scale-90">
+                <i class="fa-solid fa-arrow-right text-xs sm:text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="servicesSlider" class="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 hide-scrollbar px-1 pt-1">
+
+        <div onclick="openServiceModal(1)" class="w-[280px] sm:w-[330px] md:w-[360px] lg:w-[380px] shrink-0 snap-start bg-brandCardBg rounded-2xl overflow-hidden border border-brandBorder hover-lift shadow-md cursor-pointer group">
+            <div class="h-44 sm:h-48 bg-brandDarkBg relative border-b border-brandBorder overflow-hidden">
+                <img src="h.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-5 sm:p-6 space-y-2.5">
+                <h3 class="text-lg font-bold text-brandTextPrimary group-hover:text-brandGold transition-colors duration-300">Healthcare</h3>
+                <p class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed line-clamp-2">Providing premium coaching matrices, exam resource registries, and full institutional support setups...</p>
+                <span class="text-[11px] sm:text-xs font-bold text-brandGold flex items-center gap-1 pt-1 transition-transform group-hover:translate-x-1 duration-300">Read More<i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+        </div>
+
+        <div onclick="openServiceModal(2)" class="w-[280px] sm:w-[330px] md:w-[360px] lg:w-[380px] shrink-0 snap-start bg-brandCardBg rounded-2xl overflow-hidden border border-brandBorder hover-lift shadow-md cursor-pointer group">
+            <div class="h-44 sm:h-48 bg-brandDarkBg relative border-b border-brandBorder overflow-hidden">
+                <img src="ed.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-5 sm:p-6 space-y-2.5">
+                <h3 class="text-lg font-bold text-brandTextPrimary group-hover:text-brandGold transition-colors duration-300">Education</h3>
+                <p class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed line-clamp-2">Orchestrating immediate medical diagnostics, pharmaceutical supply pipelines, and field clinics...</p>
+                <span class="text-[11px] sm:text-xs font-bold text-brandGold flex items-center gap-1 pt-1 transition-transform group-hover:translate-x-1 duration-300">Read More <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+        </div>
+
+        <div onclick="openServiceModal(3)" class="w-[280px] sm:w-[330px] md:w-[360px] lg:w-[380px] shrink-0 snap-start bg-brandCardBg rounded-2xl overflow-hidden border border-brandBorder hover-lift shadow-md cursor-pointer group">
+            <div class="h-44 sm:h-48 bg-brandDarkBg relative border-b border-brandBorder overflow-hidden">
+                <img src="sw.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-5 sm:p-6 space-y-2.5">
+                <h3 class="text-lg font-bold text-brandTextPrimary group-hover:text-brandGold transition-colors duration-300">Social Welfare</h3>
+                <p class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed line-clamp-2">Direct structured allowance distribution setups ensuring absolute transparency and human safety networks...</p>
+                <span class="text-[11px] sm:text-xs font-bold text-brandGold flex items-center gap-1 pt-1 transition-transform group-hover:translate-x-1 duration-300">Read More <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+        </div>
+
+        <div onclick="openServiceModal(4)" class="w-[280px] sm:w-[330px] md:w-[360px] lg:w-[380px] shrink-0 snap-start bg-brandCardBg rounded-2xl overflow-hidden border border-brandBorder hover-lift shadow-md cursor-pointer group">
+            <div class="h-44 sm:h-48 bg-brandDarkBg relative border-b border-brandBorder overflow-hidden">
+                <img src="vtwomens.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-5 sm:p-6 space-y-2.5">
+                <h3 class="text-lg font-bold text-brandTextPrimary group-hover:text-brandGold transition-colors duration-300">Vocational Training For Womens</h3>
+                <p class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed line-clamp-2">Empowering women with modern professional skill sets, technical toolkits, and specialized certification paths...</p>
+                <span class="text-[11px] sm:text-xs font-bold text-brandGold flex items-center gap-1 pt-1 transition-transform group-hover:translate-x-1 duration-300">Read More <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- =========================================================================
+         [SECTION 6] SERVICES POPUP MODAL (WITH 4-PICTURE GALLERY SLIDER + UNIQUE DESCRIPTION)
+         ========================================================================= -->
+    <div id="serviceModal" class="fixed inset-0 z-50 bg-[#2d271e]/45 backdrop-blur-md hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="bg-brandCardBg rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border border-brandBorder transform scale-95 transition-transform duration-300">
+            
+            <button onclick="closeServiceModal()" class="absolute top-4 right-4 z-30 w-9 h-9 bg-white text-brandTextPrimary rounded-full flex items-center justify-center shadow border border-brandBorder hover:bg-brandGold hover:text-white transition-all active:scale-90">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Image Slider Container (4 Pictures) -->
+            <div class="relative h-56 sm:h-64 lg:h-72 bg-brandDarkBg border-b border-brandBorder overflow-hidden">
+                <div id="serviceSliderTrack" class="w-full h-full flex transition-transform duration-500">
+                    <!-- Dynamic images injected here -->
+                </div>
+                <!-- Slider Controls -->
+                <button onclick="moveServiceSlider(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-brandBorder flex items-center justify-center text-brandTextPrimary hover:bg-brandGold hover:text-white transition-all">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button onclick="moveServiceSlider(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-brandBorder flex items-center justify-center text-brandTextPrimary hover:bg-brandGold hover:text-white transition-all">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+            
+            <!-- Content & Individual Descriptions Inside Service Modal -->
+            <div class="p-6 sm:p-8 space-y-3.5 relative z-20">
+                <h3 id="modalTitle" class="text-xl sm:text-2xl font-extrabold text-brandTextPrimary">Service Title</h3>
+                <div class="w-12 h-0.5 bg-brandGold rounded-full"></div>
+                <p id="modalDescription" class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed pt-1">Comprehensive description...</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         [SECTION 7] TIMELINES / EVENTS LOG CAROUSEL (8 CARDS)
+         ========================================================================= -->
+    <section id="events" class="reveal-element max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 bg-brandDarkBg border-y border-brandBorder">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+            <div>
+                <span class="text-[10px] sm:text-xs font-bold tracking-widest text-brandGold uppercase bg-amber-50 border border-brandBorder px-3 py-1 rounded-full shadow-sm">Timelines</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-brandTextPrimary tracking-tight mt-2">Latest Events & Meetings</h2>
+                <p class="text-xs sm:text-sm text-brandTextSecondary mt-1">Click on any event card to unlock detailed meeting timelines and full media slider</p>
+            </div>
+            <div class="flex gap-3 self-end sm:self-auto">
+                <button onclick="scrollTimelines('left')" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-brandBorder shadow-sm flex items-center justify-center hover:bg-brandGold hover:text-white hover:-translate-x-0.5 transition-all text-brandTextSecondary active:scale-90">
+                    <i class="fa-solid fa-arrow-left text-xs sm:text-sm"></i>
+                </button>
+                <button onclick="scrollTimelines('right')" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-brandBorder shadow-sm flex items-center justify-center hover:bg-brandGold hover:text-white hover:translate-x-0.5 transition-all text-brandTextSecondary active:scale-90">
+                    <i class="fa-solid fa-arrow-right text-xs sm:text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- [CAROUSEL HOLDER] 8 CARDS GENERATED -->
+        <div id="timelinesSlider" class="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 hide-scrollbar px-1 pt-1">
+            
+            <!-- Loop rendering 8 cards -->
+            <script>
+                const cardTitles = [
+                    "CAP Form Registration Session",
+                    "Deccan Executive Assembly",
+                    "Class 12 Merit Alignment",
+                    "Community IT BootCamp Initiative",
+                    "Sovereign Medical Desk Launch",
+                    "Ration Logistics Strategy Meet",
+                    "Annual Welfare Audit Board",
+                    "Youth Council Guidance Matrix",
+                    "Tree installed"
+                ];
+                const cardDates = ["June 11, 2026", "May 28, 2026", "May 15, 2026", "May 02, 2026", "April 18, 2026", "April 05, 2026", "March 22, 2026", "March 10, 2026","August 29,2026"];
+                
+                for(let i = 1; i <= 8; i++) {
+                    document.write(`
+                        <div onclick="openEventModal(${i})" class="w-[280px] sm:w-[330px] md:w-[360px] lg:w-[380px] shrink-0 snap-start bg-brandCardBg rounded-2xl overflow-hidden border border-brandBorder hover-lift shadow-md cursor-pointer group">
+                            <div class="h-44 sm:h-48 bg-brandDarkBg flex flex-col items-center justify-center text-brandTextSecondary text-xs relative border-b border-brandBorder overflow-hidden">
+                                ${i === 1 ? '<img src="event.jpeg" alt="Event img" class="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105" onerror="this.style.display=\'none\'">' : ''}
+                                <i class="fa-regular fa-image text-3xl text-brandGold/30 z-0"></i>
+                                <span class="absolute bottom-3 left-3 bg-white border border-brandBorder text-brandGold text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider shadow-sm z-10">${cardDates[i-1]}</span>
+                            </div>
+                            <div class="p-5 sm:p-6 space-y-2.5">
+                                <h3 class="text-base sm:text-lg font-bold text-brandTextPrimary group-hover:text-brandGold transition-colors duration-300">${cardTitles[i-1]}</h3>
+                                <p class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed line-clamp-2">Comprehensive framework operational deployment and agenda matrices configured for this deployment cycle...</p>
+                                <span class="text-[11px] sm:text-xs font-bold text-brandGold flex items-center gap-1 pt-1 transition-transform group-hover:translate-x-1 duration-300">Open Full Timeline <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+
+        </div>
+    </section>
+
+
+    <!-- =========================================================================
+         [SECTION 8] TIMELINE EVENTS POPUP MODAL (WITH 5-PICTURE GALLERY SLIDER + SHARED SINGLE DESCRIPTION)
+         ========================================================================= -->
+    <div id="eventModal" class="fixed inset-0 z-50 bg-[#2d271e]/45 backdrop-blur-md hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="bg-brandCardBg rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border border-brandBorder transform scale-95 transition-transform duration-300">
+            
+            <button onclick="closeEventModal()" class="absolute top-4 right-4 z-30 w-9 h-9 bg-white text-brandTextPrimary rounded-full flex items-center justify-center shadow border border-brandBorder hover:bg-brandGold hover:text-white transition-all active:scale-90">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Image Slider Container (5 Pictures) -->
+            <div class="relative h-56 sm:h-64 lg:h-72 bg-brandDarkBg border-b border-brandBorder overflow-hidden">
+                <div id="eventSliderTrack" class="w-full h-full flex transition-transform duration-500">
+                    <!-- Dynamic images injected here -->
+                </div>
+                <!-- Slider Controls -->
+                <button onclick="moveEventSlider(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-brandBorder flex items-center justify-center text-brandTextPrimary hover:bg-brandGold hover:text-white transition-all">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button onclick="moveEventSlider(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-brandBorder flex items-center justify-center text-brandTextPrimary hover:bg-brandGold hover:text-white transition-all">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-3.5 relative z-20">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <h3 id="eventModalTitle" class="text-xl sm:text-2xl font-extrabold text-brandTextPrimary">Event Title</h3>
+                    <span id="eventModalDate" class="bg-brandDarkBg border border-brandBorder text-brandGold text-xs font-bold px-3 py-1.5 rounded-lg max-w-max shadow-sm">Date</span>
+                </div>
+                <div class="w-12 h-0.5 bg-brandGold rounded-full"></div>
+                <!-- Fixed Static Single Shared Description for all 5 images -->
+                <p id="eventModalDescription" class="text-brandTextSecondary text-xs sm:text-sm leading-relaxed pt-1">Comprehensive shared single description...</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         [SECTION 9] CONTACT MATRIX
+         ========================================================================= -->
+    <section id="contact" class="reveal-element max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
+        <div class="bg-brandCardBg rounded-3xl p-5 sm:p-10 lg:p-12 border border-brandBorder shadow-xl overflow-hidden relative backdrop-blur-sm transition-shadow duration-500 hover:shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+                
+                <div class="lg:col-span-2 space-y-4">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold tracking-widest text-brandGold uppercase bg-amber-50 border border-brandBorder px-3 py-1 rounded-full shadow-sm">Get In Touch</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-brandTextPrimary tracking-tight mt-2">Contact</h2>
+                    </div>
+                    <p class="text-brandTextSecondary font-medium text-xs sm:text-sm leading-relaxed text-justify">
+                        Have queries regarding registration, membership workflows, or support channels? Connect with our administration division instantly.
+                    </p>
+                    <div class="space-y-2.5 sm:space-y-3.5 text-xs sm:text-sm font-semibold text-brandTextPrimary pt-1">
+                        <div class="flex items-center gap-3 group max-w-max cursor-pointer"><i class="fa-solid fa-envelope text-brandGold text-xs sm:text-sm bg-brandDarkBg p-2.5 rounded-xl border border-brandBorder transition-transform group-hover:rotate-12"></i> <span id="contactEmail" class="group-hover:text-brandGold transition-colors">support@deccanwelfare.org</span></div>
+                        <div class="flex items-center gap-3 group max-w-max"><i class="fa-solid fa-location-dot text-brandGold text-xs sm:text-sm bg-brandDarkBg p-2.5 rounded-xl border border-brandBorder transition-transform group-hover:translate-y-[-2px]"></i> <span id="contactAddress">Karachi, Sindh, Pakistan</span></div>
+                        <div class="flex items-center gap-3 group max-w-max"><i class="fa-solid fa-phone text-brandGold text-xs sm:text-sm bg-brandDarkBg p-2.5 rounded-xl border border-brandBorder"></i> <span id="contactPhone">03150216409</span></div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-3">
+                    <form class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3.5 sm:gap-y-5" onsubmit="event.preventDefault();">
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brandTextSecondary">Full Name</label>
+                            <input type="text" class="w-full bg-brandDarkBg border border-brandBorder rounded-xl px-4 py-3 text-xs sm:text-sm text-brandTextPrimary focus:outline-none focus:border-brandGold focus:bg-white transition-all" placeholder="M. Balach">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brandTextSecondary">Email Address</label>
+                            <input type="email" class="w-full bg-brandDarkBg border border-brandBorder rounded-xl px-4 py-3 text-xs sm:text-sm text-brandTextPrimary focus:outline-none focus:border-brandGold focus:bg-white transition-all" placeholder="name@domain.com">
+                        </div>
+                        <div class="sm:col-span-2 space-y-1.5">
+                            <label class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brandTextSecondary">Your Message</label>
+                            <textarea rows="4" class="w-full bg-brandDarkBg border border-brandBorder rounded-xl px-4 py-3 text-xs sm:text-sm text-brandTextPrimary focus:outline-none focus:border-brandGold focus:bg-white transition-all" placeholder="Write here..."></textarea>
+                        </div>
+                        <div class="sm:col-span-2 pt-1">
+                            <button class="shimmer-btn w-full sm:w-auto bg-brandGold text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-xl hover:bg-brandGoldHover transition-all shadow-md active:scale-95">
+                                Dispatch Message <i class="fa-solid fa-paper-plane ml-2 text-[10px]"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================================
+         [SECTION 10] REFINED FOOTER ECOSYSTEM
+         ========================================================================= -->
+    <footer class="bg-brandFooterBg text-brandTextSecondary py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-brandBorder">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-10 border-b border-brandBorder/80">
+            
+            <div class="lg:col-span-4 space-y-4 max-w-full overflow-hidden">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center p-0.5 border border-brandBorder shadow-sm overflow-hidden transition-transform duration-500 hover:rotate-12">
+                        <img src="logo.jpeg" alt="Deccan NGO Logo" class="w-full h-full object-contain rounded-full">
+                    </div>
+                    <span class="text-[10px] font-black tracking-widest text-brandGold uppercase">Official Hub</span>
+                </div>
+                <h3 class="premium-urdu text-lg sm:text-xl md:text-2xl text-brandGold font-bold max-w-full break-words">دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن</h3>
+                <p class="text-xs leading-relaxed text-brandTextSecondary font-medium text-justify">
+                    A high-tier civic structured platform engineered to deliver sustainable support structures, communal welfare matrices, and academic pathways.
+                </p>
+            </div>
+
+            <div class="lg:col-span-5 space-y-4 md:pl-4 lg:pl-6">
+                <h4 class="text-brandTextPrimary text-xs sm:text-sm font-bold tracking-wider uppercase">NGO Contact Hub</h4>
+                <div class="space-y-4 text-xs font-semibold text-brandTextPrimary">
+                    
+                    <a href="https://wa.me/923001234567" target="_blank" class="flex items-start gap-3.5 group max-w-max">
+                        <div class="w-9 h-9 rounded-xl bg-white border border-brandBorder flex items-center justify-center text-[#25D366] shadow-sm group-hover:bg-[#25D366] group-hover:text-white transition-all duration-300 shrink-0 group-hover:scale-105">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-brandTextSecondary uppercase font-bold tracking-wider">WhatsApp Helpline</span>
+                            <span class="text-brandTextPrimary font-bold group-hover:text-brandGold transition-colors">+92 300 1234567</span>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:info@deccanwelfare.org" class="flex items-start gap-3.5 group max-w-max">
+                        <div class="w-9 h-9 rounded-xl bg-white border border-brandBorder flex items-center justify-center text-[#EA4335] shadow-sm group-hover:bg-[#EA4335] group-hover:text-white transition-all duration-300 shrink-0 group-hover:scale-105">
+                            <i class="fa-solid fa-envelope text-base"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-brandTextSecondary uppercase font-bold tracking-wider">Official Email</span>
+                            <span class="text-brandTextPrimary font-bold group-hover:text-brandGold transition-colors">info@deccanwelfare.org</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="flex items-start gap-3.5 group max-w-max">
+                        <div class="w-9 h-9 rounded-xl bg-white border border-brandBorder flex items-center justify-center text-[#4285F4] shadow-sm group-hover:bg-[#4285F4] group-hover:text-white transition-all duration-300 shrink-0 group-hover:scale-105">
+                            <i class="fa-solid fa-location-dot text-base"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-brandTextSecondary uppercase font-bold tracking-wider">Registered Address</span>
+                            <span class="text-brandTextPrimary font-bold leading-relaxed group-hover:text-brandGold transition-colors">Plot 12-C, Sector 36-G, Landhi, Karachi, Pakistan</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3 space-y-4">
+                <h4 class="text-brandTextPrimary text-xs sm:text-sm font-bold tracking-wider uppercase">Connect Ecosystem</h4>
+                <p class="text-xs text-brandTextSecondary font-medium">Follow our official media nodes for live updates, donation audits, and visual logs.</p>
+                <div class="flex items-center gap-3 pt-1">
+                    <a href="https://facebook.com" target="_blank" class="w-10 h-10 bg-white hover:bg-[#1877F2] border border-brandBorder hover:border-[#1877F2] text-[#1877F2] hover:text-white flex items-center justify-center rounded-xl text-base transition-all shadow-sm hover:scale-110 duration-300">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 bg-white hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] border border-brandBorder hover:border-transparent text-[#e1306c] hover:text-white flex items-center justify-center rounded-xl text-base transition-all shadow-sm hover:scale-110 duration-300">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="w-10 h-10 bg-white hover:bg-[#FF0000] border border-brandBorder hover:border-[#FF0000] text-[#FF0000] hover:text-white flex items-center justify-center rounded-xl text-base transition-all shadow-sm hover:scale-110 duration-300">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-[11px] font-semibold text-brandTextSecondary">
+            <p>© 2026 دکن حیدرآبادی ویلفیئر کمیونٹی آرگنائزیشن. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- =========================================================================
+         [SECTION 11] CORE JAVASCRIPT EMULATION ENGINE MODULE
+         ========================================================================= -->
+    <script>
+        
+        // [JS BLOCK 1] MOBILE INTERCEPTORS
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== undefined && event.scale !== 1) { event.preventDefault(); }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) { event.preventDefault(); }
+            lastTouchEnd = now;
+        }, false);
+
+        // [JS BLOCK 2] INTERSECTION OBSERVER
+        document.addEventListener("DOMContentLoaded", function() {
+            const elementsToReveal = document.querySelectorAll(".reveal-element");
+            const observerOptions = { root: null, threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            elementsToReveal.forEach(el => observer.observe(el));
+        });
+
+        // [JS BLOCK 3] MOBILE HAMBURGER TOGGLE MENU
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => { menu.style.opacity = "1"; menu.style.transform = "scaleY(1)"; }, 10);
+                icon.style.transform = "rotate(90deg)";
+                setTimeout(() => { icon.className = "fa-solid fa-xmark text-lg"; icon.style.transform = "rotate(0deg)"; }, 150);
+            } else {
+                menu.style.opacity = "0"; menu.style.transform = "scaleY(0.95)"; icon.style.transform = "rotate(-90deg)";
+                setTimeout(() => { menu.classList.add('hidden'); icon.className = "fa-solid fa-bars text-lg"; icon.style.transform = "rotate(0deg)"; }, 300);
+            }
+        }
+
+        // [JS BLOCK 4] HORIZONTAL ARROW SCROLLING
+        function scrollServices(direction) {
+            const slider = document.getElementById('servicesSlider');
+            const stepWidth = slider.querySelector(':scope > div').clientWidth + 24; 
+            slider.scrollLeft += (direction === 'left' ? -stepWidth : stepWidth);
+        }
+
+        function scrollTimelines(direction) {
+            const slider = document.getElementById('timelinesSlider');
+            const stepWidth = slider.querySelector(':scope > div').clientWidth + 24;
+            slider.scrollLeft += (direction === 'left' ? -stepWidth : stepWidth);
+        }
+
+
+        
+
+        // =========================================================================
+        // [DATABASE 1] SERVICES LANDSCAPE STATIC MATRIX DATA (4 pictures + 4 unique descriptions each)
+        // =========================================================================
+        const serviceDatabase = {
+            1: { 
+                title: "Healthcare", 
+                images: ["freemedicalcamp.jpeg", "eyecamp.jpeg", "medicalcentre.jpeg", "ambulance.jpeg"],
+                descs: [
+                    "Phase 1: Setup of specialized high-tier coaching registries and scheduling.",
+                    "Phase 2: Provisioning core intermediate textbooks and exam resource libraries.",
+                    "Phase 3: Allocation of strategic registration financial funds to junior students.",
+                    "Phase 4: Establishing regular academic alignment and evaluation tracking panels."
+                ]
+            },
+            2: { 
+                title: "Education", 
+                images: ["modelschool.jpeg", "cc.jpeg", "it.jpeg", "seminar.jpeg"],
+                descs: [
+                    "Phase 1: Mobilizing field emergency clinical nodes with general practitioners.",
+                    "Phase 2: Launching immediate essential diagnostic evaluation campaigns.",
+                    "Phase 3: Deploying premium targeted pharmaceutical supply pipelines.",
+                    "Phase 4: Setting up continuous familial healthcare monitoring frameworks."
+                ]
+            },
+            3: { 
+                title: "Social Welfare", 
+                images: ["iftar.jpeg", "ration.jpeg", "vege.jpeg", "heatcmp.jpeg"],
+                descs: [
+                    "Phase 1: Executing complete household digital verification workflows.",
+                    "Phase 2: Launching transparent monthly allowance distribution setup channels.",
+                    "Phase 3: Integrating direct banking corporate node links seamlessly.",
+                    "Phase 4: Safeguarding human dignity metrics with secure audit networks."
+                ]
+            },
+            4: {
+                title: "Vocational training program for women's",
+                images: ["", "", "", ""],
+                descs: [
+                    "Phase 1: Structuring modern technical training curricula focused on future self-reliance.",
+                    "Phase 2: Launching tailored craft and technological development programs.",
+                    "Phase 3: Providing essential toolkits and professional workspace setup guides.",
+                    "Phase 4: Connecting certified individuals with direct marketplace options."
+                ]
+            }
+        };
+
+        let currentServiceId = 1;
+        let currentServiceImgIdx = 0;
+
+        function openServiceModal(id) {
+            const data = serviceDatabase[id];
+            if (!data) return;
+            currentServiceId = id;
+            currentServiceImgIdx = 0;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            
+            const track = document.getElementById('serviceSliderTrack');
+            track.innerHTML = '';
+            data.images.forEach((img, i) => {
+                if(img && img.trim() !== "") {
+                    track.innerHTML += `<img src="${img}" class="w-full h-full object-cover shrink-0" style="width:100%">`;
+                } else {
+                    track.innerHTML += `<div class="w-full h-full bg-brandDarkBg flex flex-col items-center justify-center text-brandTextSecondary shrink-0" style="width:100%"><i class="fa-regular fa-image text-4xl opacity-30 mb-2"></i><span class="text-xs font-bold uppercase tracking-widest text-brandGold">Gallery Media Image ${i+1}</span></div>`;
+                }
+            });
+
+            updateServiceSlideContent();
+
+            const modal = document.getElementById('serviceModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+            setTimeout(() => { modal.classList.remove('opacity-0'); modal.querySelector('.transform').classList.remove('scale-95'); }, 20);
+        }
+
+        function moveServiceSlider(dir) {
+            const data = serviceDatabase[currentServiceId];
+            currentServiceImgIdx += dir;
+            if(currentServiceImgIdx >= data.images.length) currentServiceImgIdx = 0;
+            if(currentServiceImgIdx < 0) currentServiceImgIdx = data.images.length - 1;
+            
+            updateServiceSlideContent();
+        }
+
+        function updateServiceSlideContent() {
+            const data = serviceDatabase[currentServiceId];
+            const track = document.getElementById('serviceSliderTrack');
+            track.style.transform = `translateX(-${currentServiceImgIdx * 100}%)`;
+            // Unique description update for each image
+            document.getElementById('modalDescription').innerText = data.descs[currentServiceImgIdx];
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('serviceModal');
+            if (!modal) return;
+            modal.classList.add('opacity-0'); modal.querySelector('.transform').classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+        }
+
+
+        // =========================================================================
+        // [DATABASE 2] TIMELINE LATEST EVENTS MATRIX DATA (5 pictures + 1 Single Fixed description)
+        // =========================================================================
+        const eventDatabase = {
+            1: { title: "CAP Form Registration Session", date: "June 11, 2026", images: ["event.jpeg", "", "", "", ""], desc: "Comprehensive structured registration drive executed perfectly to secure digital admissions for junior applicants. The workspace managed extensive documentation reviews, digital entries, and verification workflows smoothly for all incoming candidates." },
+            2: { title: "Deccan Executive Assembly", date: "May 28, 2026", images: ["", "", "", "", ""], desc: "High-level administrative assembly evaluating the operational impact, civic support matrices, and audited budget allocations of previous quarters to design future community roadmaps." },
+            3: { title: "Class 12 Merit Alignment", date: "May 15, 2026", images: ["", "", "", "", ""], desc: "Specialized academic tracking session managing textbook allocations, syllabus coverage timelines, and expert board templates for higher secondary computer science and pre-engineering student batches." },
+            4: { title: "Community IT BootCamp Initiative", date: "May 02, 2026", images: ["", "", "", "", ""], desc: "Operational launch of the modern UI design and software technology introductory classes structured entirely to empower high-potential youth in building local tech capabilities." },
+            5: { title: "Sovereign Medical Desk Launch", date: "April 18, 2026", images: ["", "", "", "", ""], desc: "Field setup and testing of decentralized pharmaceutical networks alongside free diagnostic equipment distribution cycles inside urban target zones." },
+            6: { title: "Ration Logistics Strategy Meet", date: "April 05, 2026", images: ["", "", "", "", ""], desc: "Strategic planning board alignment evaluating high-nutrition survival boxes deployment metrics, barcode verification pipelines, and logistics vendor networks." },
+            7: { title: "Annual Welfare Audit Board", date: "March 22, 2026", images: ["", "", "", "", ""], desc: "Annual general assembly presenting audited statements and multi-tier transparent financial ledgers directly to corporate partners and community heads." },
+            8: { title: "Youth Council Guidance Matrix", date: "March 10, 2026", images: ["", "", "", "", ""], desc: "Counseling interaction drive structured to align final-year higher secondary graduates towards optimized university choices and degree registration workflows." },
+            9: { title: "Tree installed", date: "August 29, 2026", images: ["", "", "", "", ""], desc: "Counseling interaction drive structured to align final-year higher secondary graduates towards optimized university choices and degree registration workflows." }
+        };
+
+        let currentEventId = 1;
+        let currentEventImgIdx = 0;
+
+        function openEventModal(id) {
+            const data = eventDatabase[id];
+            if (!data) return;
+            currentEventId = id;
+            currentEventImgIdx = 0;
+
+            document.getElementById('eventModalTitle').innerText = data.title;
+            document.getElementById('eventModalDate').innerText = data.date;
+            // 1 Fixed Static single description for all 5 images
+            document.getElementById('eventModalDescription').innerText = data.desc;
+            
+            const track = document.getElementById('eventSliderTrack');
+            track.innerHTML = '';
+            data.images.forEach((img, i) => {
+                if(img && img.trim() !== "") {
+                    track.innerHTML += `<img src="${img}" class="w-full h-full object-cover shrink-0" style="width:100%">`;
+                } else {
+                    track.innerHTML += `<div class="w-full h-full bg-brandDarkBg flex flex-col items-center justify-center text-brandTextSecondary shrink-0" style="width:100%"><i class="fa-regular fa-image text-4xl opacity-30 mb-2"></i><span class="text-xs font-bold uppercase tracking-widest text-brandGold">Event Gallery Pic ${i+1}</span></div>`;
+                }
+            });
+
+            updateEventSlidePosition();
+
+            const modal = document.getElementById('eventModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+            setTimeout(() => { modal.classList.remove('opacity-0'); modal.querySelector('.transform').classList.remove('scale-95'); }, 20);
+        }
+
+        function moveEventSlider(dir) {
+            const data = eventDatabase[currentEventId];
+            currentEventImgIdx += dir;
+            if(currentEventImgIdx >= data.images.length) currentEventImgIdx = 0;
+            if(currentEventImgIdx < 0) currentEventImgIdx = data.images.length - 1;
+            
+            updateEventSlidePosition();
+        }
+
+        function updateEventSlidePosition() {
+            const track = document.getElementById('eventSliderTrack');
+            track.style.transform = `translateX(-${currentEventImgIdx * 100}%)`;
+        }
+
+        function closeEventModal() {
+            const modal = document.getElementById('eventModal');
+            if (!modal) return;
+            modal.classList.add('opacity-0'); modal.querySelector('.transform').classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+        }
+    </script>
+<script src="/app.js" defer></script>
+</body>
+</html>

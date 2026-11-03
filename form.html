@@ -499,6 +499,83 @@
             .actions-bar { flex-direction: row; justify-content: flex-end; }
             .btn { width: auto; padding: 14px 35px; }
         }
+
+        /* ===== PRINT / SAVE AS PDF: everything on ONE A4 page ===== */
+        @page { size: A4 portrait; margin: 8mm; }
+
+        @media print {
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            html, body { height: auto; background: #fff; }
+            body { display: block; min-height: 0; padding: 0; }
+
+            .actions-bar, .pad-controls, .uploader-content i, .cnic-box-grid { display: none !important; }
+
+            .form-card {
+                zoom: 0.95; /* safety margin so Urdu font differences never push it to page 2 */
+                max-width: none; width: 100%; margin: 0;
+                border-radius: 0; box-shadow: none;
+                break-inside: avoid; page-break-inside: avoid;
+            }
+            .form-card::before { height: 4px; }
+
+            .form-header { flex-direction: row; text-align: left; align-items: center; gap: 14px; padding: 10px 16px 6px; }
+            .logo-container { width: 62px; height: 62px; padding: 3px; box-shadow: none; }
+            .header-text h1 { font-size: 15px; margin-bottom: 2px; }
+            .header-text .urdu-title { font-size: 13px; line-height: 2; margin-bottom: 4px; text-align: left; }
+            .header-meta { flex-direction: row; justify-content: flex-start; gap: 10px; }
+            .badge { font-size: 10px; padding: 4px 12px; }
+            .form-no { font-size: 10px; padding: 3px 9px; }
+
+            .form-body { padding: 6px 16px 12px; }
+            .section-divider { margin: 8px 0 6px; }
+            .section-divider span { font-size: 12px; }
+
+            .top-grid { grid-template-columns: 1fr 105px; gap: 14px; align-items: start; }
+            .info-inputs { display: grid; gap: 8px; }
+            .photo-uploader-wrapper { margin: 0; justify-content: flex-end; }
+            .photo-uploader { width: 100px; height: 125px; border-radius: 8px; border-width: 1px; }
+            .uploader-content span { font-size: 9px; }
+
+            .form-grid { grid-template-columns: repeat(3, 1fr); gap: 8px 12px; margin-top: 8px !important; }
+            .full-width { grid-column: auto; }
+            .span-all { grid-column: 1 / -1; }
+            .form-group { break-inside: avoid; page-break-inside: avoid; }
+
+            .form-group label { margin-bottom: 2px; gap: 4px; flex-wrap: nowrap; white-space: nowrap; }
+            .form-group label .en-label { font-size: 9px; }
+            .form-group label .urdu-label { font-size: 9.5px; line-height: 1.8; }
+
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group select {
+                height: 26px; padding: 4px 8px; font-size: 11px;
+                border: 1px solid #b9b2a4; border-radius: 4px; background: #fff;
+                -webkit-appearance: none; appearance: none; box-shadow: none;
+            }
+            ::placeholder { color: transparent !important; }
+
+            .cnic-mobile-input { display: block !important; width: 100%; }
+
+            .gender-container { gap: 6px; }
+            .gender-btn label { height: 26px; padding: 0 4px; font-size: 10px; border-width: 1px; border-radius: 4px; gap: 3px; }
+            .gender-btn label i { display: none; }
+            .gender-btn input[type="radio"]:checked + label { background: var(--brand-gold); border-color: var(--brand-gold); color: #fff; }
+
+            .declaration-container { margin-top: 16px; padding: 14px 12px 8px; border-width: 1px; border-radius: 8px; }
+            .declaration-title { font-size: 9px; padding: 3px 10px; top: -9px; }
+            .declaration-text { font-size: 10px; line-height: 1.5; margin: 2px 0 6px; }
+            .declaration-text-urdu { font-size: 11px; line-height: 2.1; padding-top: 6px; }
+
+            .signature-section { margin-top: 12px; justify-content: flex-end; }
+            .signature-box { max-width: 260px; gap: 3px; }
+            .signature-box label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+            .signature-box .urdu-label { font-size: 9.5px; line-height: 1.8; }
+            .signature-box .en-label { font-size: 0; }
+            .signature-box .en-label::after { content: "Applicant Signature"; font-size: 10px; }
+            .signature-pad-wrapper { border-width: 1px; border-radius: 6px; background: #fff; }
+            canvas#signatureCanvas { height: 70px; object-fit: contain; }
+        }
     </style>
 </head>
 <body>
@@ -559,7 +636,7 @@
             </div>
 
             <div class="form-grid" style="margin-top: 15px;">
-                <div class="form-group full-width">
+                <div class="form-group full-width span-all">
                     <label for="address">
                         <span class="en-label">Residential Address</span>
                         <span class="urdu-label">موجودہ رہائشی پتہ</span>
@@ -643,7 +720,7 @@
 
                 <div class="form-group">
                     <label for="town">
-                        <span>Town / Locality</span>
+                        <span class="en-label">Town / Locality</span>
                         <span class="urdu-label">ٹاؤن / علاقہ</span>
                     </label>
                     <input type="text" name="Town" id="town" placeholder="e.g. Gulshan Town">
@@ -783,7 +860,7 @@
 
             <div class="actions-bar">
                 <button type="button" class="btn btn-secondary" onclick="window.print()">
-                    <i class="fa-solid fa-print"></i> Print Out PDF Form
+                    <i class="fa-solid fa-file-pdf"></i> Download PDF Form
                 </button>
                 <button type="submit" id="submitBtn" class="btn btn-primary">
                     <i class="fa-solid fa-file-shield"></i> Submit Membership Record
@@ -900,6 +977,8 @@
             if(index === 4 || index === 11) fullCnic += "-";
         });
         document.getElementById('compiledDesktopCnic').value = fullCnic;
+        // keep the single CNIC field in sync so the PDF always shows it
+        document.getElementById('mobileCnicField').value = fullCnic.replace(/-/g, '') ? fullCnic : '';
     }
 
     const mobileCnic = document.getElementById('mobileCnicField');
@@ -916,6 +995,27 @@
             }
         }
         e.target.value = formatted;
+    });
+
+    // PDF / print helpers: sensible file name + no "Choose status..." text on paper
+    let originalTitle = document.title;
+    window.addEventListener('beforeprint', function() {
+        originalTitle = document.title;
+        const name = (document.getElementById('fullName').value || '').trim();
+        document.title = name ? 'Membership Form - ' + name : 'Membership Form';
+        document.querySelectorAll('select').forEach(function(sel) {
+            if (!sel.value && sel.options[0]) {
+                sel.options[0].dataset.label = sel.options[0].text;
+                sel.options[0].text = '\u00a0';
+            }
+        });
+    });
+    window.addEventListener('afterprint', function() {
+        document.title = originalTitle;
+        document.querySelectorAll('select option[data-label]').forEach(function(opt) {
+            opt.text = opt.dataset.label;
+            delete opt.dataset.label;
+        });
     });
 
     // Formspree AJAX Submission Integration with Instant Redirection
